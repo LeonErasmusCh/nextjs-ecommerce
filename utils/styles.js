@@ -34,5 +34,9 @@ const useStyles = makeStyles({
       paddingLeft: 16,
     },
   },
+  navbarButton: {
+    color: '#ffffff',
+    textTransform: 'initial',
+  },
 });
 export default useStyles;
