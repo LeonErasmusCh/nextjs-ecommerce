@@ -93,10 +93,13 @@ function CartScreen() {
                       <TableCell>
                         <NextLink href={`/product/${item.slug}`} passHref>
                           <Link>
-                            <Typography>{item.name}</Typography>
+                            <Typography color="secondary">
+                              {item.name}
+                            </Typography>
                           </Link>
                         </NextLink>
                       </TableCell>
+
                       <TableCell align="right">
                         <Select
                           value={item.quantity}
@@ -140,7 +143,7 @@ function CartScreen() {
                 <ListItem>
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     fullWidth
                     onClick={checkoutHandler}
                   >

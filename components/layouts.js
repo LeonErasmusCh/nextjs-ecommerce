@@ -69,6 +69,7 @@ export default function Layout({ title, description, children }) {
               <div>
                 <Switch
                   checked={darkMode}
+                  color="secondary"
                   onChange={darkModeChangeHandler}
                 ></Switch>
                 <NextLink href="/cart" passHref>
