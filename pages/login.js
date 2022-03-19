@@ -14,8 +14,17 @@ import useStyles from '../utils/styles';
 import { Store } from '../utils/Store';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const { redirect } = router.query; // login?redirect=/shipping
   const { state, dispatch } = useContext(Store);
@@ -27,12 +36,9 @@ export default function Login() {
     }
   }, []);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const classes = useStyles();
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async ({ email, password }) => {
+    closeSnackbar();
     try {
       const { data } = await axios.post('/api/users/login', {
         email,
@@ -43,35 +49,80 @@ export default function Login() {
       Cookies.set('userInfo', JSON.stringify(data));
       router.push(redirect || '/');
     } catch (err) {
-      alert(err.response.data ? err.response.data.message : err.message);
+      enqueueSnackbar(
+        err.response.data ? err.response.data.message : err.message,
+        { variant: 'error' }
+      );
     }
   };
   return (
     <Layout title="Login">
-      <form onSubmit={submitHandler} className={classes.form}>
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h1" variant="h1">
           Login
         </Typography>
         <List>
           <ListItem>
-            <TextField
-              variant="outlined"
-              fullWidth
-              id="email"
-              label="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              inputProps={{ type: 'email' }}
-            ></TextField>
+            {/* Controller is a react-hook-form component */}
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              /* Rules = Validation  */
+              rules={{
+                required: true,
+                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="email"
+                  label="email"
+                  inputProps={{ type: 'email' }}
+                  error={Boolean(errors.email)}
+                  helperText={
+                    errors.email
+                      ? errors.email.type === 'pattern'
+                        ? 'Email is not valid'
+                        : 'Email is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
           </ListItem>
           <ListItem>
-            <TextField
-              variant="outlined"
-              fullWidth
-              id="password"
-              label="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              inputProps={{ type: 'password' }}
-            ></TextField>
+            {/* Controller is a react-hook-form component */}
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              /* Rules = Validation  */
+              rules={{
+                required: true,
+                minLength: 6,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="password"
+                  label="password"
+                  inputProps={{ type: 'password' }}
+                  error={Boolean(errors.password)}
+                  helperText={
+                    errors.password
+                      ? errors.password.type === 'minLength'
+                        ? 'Password is more than 5'
+                        : 'Password is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
           </ListItem>
           <ListItem>
             <Button
@@ -85,7 +136,8 @@ export default function Login() {
           </ListItem>
           <ListItem>
             Don't have an account? &nbsp;
-            <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
+            {/* <NextLink href={`/?redirect=${redirect || '/'}`} passHref> */}
+            <NextLink href={'/register'} passHref>
               <Link color="secondary">Register</Link>
             </NextLink>
           </ListItem>
