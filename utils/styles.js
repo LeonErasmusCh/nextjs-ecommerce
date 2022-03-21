@@ -38,5 +38,10 @@ const useStyles = makeStyles({
     color: '#ffffff',
     textTransform: 'initial',
   },
+  transparentBackground: {
+    backgroundColor: 'transparent',
+    '& .MuiStepIcon-active': { color: '#208080' },
+    '& .MuiStepIcon-completed': { color: '#208080' },
+  },
 });
 export default useStyles;

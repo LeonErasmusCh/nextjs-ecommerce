@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const connection = {};
 
-console.log(process.env.MONGODB_URI);
 // CONNECTION function
 async function connect() {
   // Check if connected
@@ -19,8 +18,9 @@ async function connect() {
     }
     await mongoose.disconnect();
   }
-  // Establish first connection to database
-  const db = await mongoose.connect(process.env.MONGODB_URI, {
+  // Establish first connection to database --USE MONGODB_URI for Compass -- localhosts:3000/api/seed to seed data to db
+  // const db = await mongoose.connect(process.env.MONGODB_URI, {
+  const db = await mongoose.connect(process.env.MONGO_CONNECTION_STRING, {
     // Removes deprication warnings
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,7 +29,6 @@ async function connect() {
   console.log('new connection');
   connection.isConnected = db.connections[0].readyState;
 }
-
 //DISCONNECT function
 async function disconnect() {
   if (connection.isConnected) {

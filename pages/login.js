@@ -44,7 +44,6 @@ export default function Login() {
         email,
         password,
       });
-      alert('login ok');
       dispatch({ type: 'USER_LOGIN', payload: data });
       Cookies.set('userInfo', JSON.stringify(data));
       router.push(redirect || '/');
