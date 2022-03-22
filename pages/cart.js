@@ -159,4 +159,5 @@ function CartScreen() {
   );
 }
 
+/* Dynamic page that will NOT be rendered server side */
 export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
