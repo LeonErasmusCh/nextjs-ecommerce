@@ -45,10 +45,11 @@ export default function ProductScreen(props) {
       <div className={classes.section}>
         <NextLink href="/" passHref>
           <Link>
-            <Typography>back to products</Typography>
+            <Typography color="secondary">back to products</Typography>
           </Link>
         </NextLink>
       </div>
+
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
           <Image
@@ -82,6 +83,7 @@ export default function ProductScreen(props) {
             </ListItem>
           </List>
         </Grid>
+
         <Grid item md={3} xs={12}>
           <Card>
             <List>
@@ -111,7 +113,7 @@ export default function ProductScreen(props) {
                 <Button
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={addToCartHandler}
                 >
                   Add to cart

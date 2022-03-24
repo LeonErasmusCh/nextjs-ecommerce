@@ -41,7 +41,7 @@ export default function Layout({ title, description, children }) {
     palette: {
       type: darkMode ? 'dark' : 'light',
       primary: {
-        main: '#f0c000',
+        main: '#f0c00',
       },
       secondary: {
         main: '#208080',

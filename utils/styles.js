@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   navbar: {
-    backgroundColor: '#303030',
+    backgroundColor: '#3D3D3D',
     '& a': {
       color: '#ffffff',
       marginLeft: 10,
@@ -49,7 +49,6 @@ const useStyles = makeStyles({
     '&:hover': {
       boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
     },
-    transition: '0.3s',
   },
 });
 export default useStyles;

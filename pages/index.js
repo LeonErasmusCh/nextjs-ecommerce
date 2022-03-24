@@ -58,7 +58,7 @@ export default function Home(props) {
                 <Typography>${product.price}</Typography>
                 <Button
                   size="small"
-                  color="primary"
+                  color="secondary"
                   onClick={() => addToCartHandler(product)}
                 >
                   add to cart
