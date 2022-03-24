@@ -15,8 +15,10 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { Store } from '../utils/Store';
+import useStyles from '../utils/styles';
 
 export default function Home(props) {
+  const classes = useStyles();
   const { products } = props;
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -39,7 +41,7 @@ export default function Home(props) {
       <Grid container spacing={3}>
         {products.map((product) => (
           <Grid item md={4} key={product.name}>
-            <Card>
+            <Card className={classes.card}>
               <NextLink href={`/product/${product.slug}`} passHref>
                 <CardActionArea>
                   <CardMedia
