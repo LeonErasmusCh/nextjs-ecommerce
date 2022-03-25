@@ -23,8 +23,10 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import useStyles from '../utils/styles';
 
 function CartScreen() {
+  const classes = useStyles();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const {
@@ -50,6 +52,13 @@ function CartScreen() {
 
   return (
     <Layout title="Shopping Cart">
+      <div className={classes.section}>
+        <NextLink href="/" passHref>
+          <Link>
+            <Typography color="secondary">back to products</Typography>
+          </Link>
+        </NextLink>
+      </div>
       <Typography component="h1" variant="h1">
         Shopping Cart
       </Typography>

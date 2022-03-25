@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   navbar: {
-    backgroundColor: '#3D3D3D',
+    backgroundColor: 'inherit',
     '& a': {
-      color: '#ffffff',
+      color: '#808080',
       marginLeft: 10,
     },
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     },
   },
   navbarButton: {
-    color: '#ffffff',
+    color: '#808080',
     textTransform: 'initial',
   },
   transparentBackground: {
@@ -49,6 +49,12 @@ const useStyles = makeStyles({
     '&:hover': {
       boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
     },
+  },
+  error: {
+    color: '#f04040',
+  },
+  fullWidth: {
+    width: '100%',
   },
 });
 export default useStyles;

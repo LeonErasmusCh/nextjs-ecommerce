@@ -48,6 +48,10 @@ function PlaceOrder() {
   useEffect(() => {
     if (!paymentMethod) {
       router.push('/payment');
+
+      if (cartItems.length === 0) {
+        router.push('/cart');
+      }
     }
   }, []);
 
