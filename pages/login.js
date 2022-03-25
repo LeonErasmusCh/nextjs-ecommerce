@@ -9,7 +9,7 @@ import {
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useContext, useEffect } from 'react';
-import Layout from '../components/layouts';
+import Layout from '../components/Layout';
 import useStyles from '../utils/styles';
 import { Store } from '../utils/Store';
 import axios from 'axios';

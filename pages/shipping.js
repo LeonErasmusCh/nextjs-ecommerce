@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react';
-import Layout from '../components/Layouts';
+import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import useStyles from '../utils/styles';
 import Cookies from 'js-cookie';

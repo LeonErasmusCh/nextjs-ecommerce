@@ -1,6 +1,6 @@
 import data from '../utils/data';
 import NextLink from 'next/link';
-import Layout from '../components/layouts';
+import Layout from '../components/Layout';
 import {
   Card,
   CardActionArea,
