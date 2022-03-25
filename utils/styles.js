@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     ' & h1': {
       paddingLeft: 16,
     },
+    width: '100%',
   },
   navbarButton: {
     color: '#808080',
