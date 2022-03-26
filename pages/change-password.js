@@ -5,13 +5,9 @@ import {
   TextField,
   Button,
   Link,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@material-ui/core';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
@@ -21,9 +17,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { getError } from '../utils/error';
 
-export default function Register() {
+export default function ChangePassword() {
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors },
@@ -41,7 +36,7 @@ export default function Register() {
     }
   }, []);
 
-  const submitHandler = async ({ name, email, password, confirmPassword }) => {
+  const submitHandler = async ({ email, password, confirmPassword }) => {
     closeSnackbar();
     if (password !== confirmPassword) {
       enqueueSnackbar("Passwords don't match", { variant: 'error' });
@@ -50,57 +45,25 @@ export default function Register() {
       return;
     }
     try {
-      const { data } = await axios.post('/api/users/register', {
-        name,
+      const { data } = await axios.put('/api/users/change-password', {
         email,
         password,
       });
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', data);
-      router.push(redirect || '/');
+      console.log(data);
+      enqueueSnackbar('Password updates successfully', { variant: 'success' });
+      router.push(redirect || '/login');
     } catch (err) {
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
 
   return (
-    <Layout title="Register">
+    <Layout title="Change Password">
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h1" variant="h1">
-          Register
+          Change Password
         </Typography>
         <List>
-          <ListItem>
-            {/* Controller is a react-hook-form component */}
-            <Controller
-              name="name"
-              control={control}
-              defaultValue=""
-              /* Rules = Validation  */
-              rules={{
-                required: true,
-                minLenght: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="name"
-                  label="name"
-                  inputProps={{ type: 'name' }}
-                  error={Boolean(errors.name)}
-                  helperText={
-                    errors.name
-                      ? errors.name.type === 'minLength'
-                        ? 'Name is must be longer than 1 character'
-                        : 'Name is required'
-                      : ''
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
           <ListItem>
             {/* Controller is a react-hook-form component */}
             <Controller
@@ -194,7 +157,6 @@ export default function Register() {
               )}
             ></Controller>
           </ListItem>
-
           <ListItem>
             <Button
               variant="contained"
@@ -204,12 +166,6 @@ export default function Register() {
             >
               Register
             </Button>
-          </ListItem>
-          <ListItem>
-            Already have an account? &nbsp;
-            <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
-              <Link color="secondary">Login</Link>
-            </NextLink>
           </ListItem>
         </List>
       </form>
