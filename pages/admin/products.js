@@ -23,6 +23,7 @@ import { getError } from '../../utils/error';
 import { Store } from '../../utils/Store';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/styles';
+import { useSnackbar } from 'notistack';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -32,6 +33,20 @@ function reducer(state, action) {
       return { ...state, loading: false, products: action.payload, error: '' };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+    case 'CREATE_REQUEST':
+      return { ...state, loadingCreate: true };
+    case 'CREATE_SUCCESS':
+      return { ...state, loadingCreate: false };
+    case 'CREATE_FAIL':
+      return { ...state, loadingCreate: false };
+    case 'DELETE_REQUEST':
+      return { ...state, loadingDelete: true };
+    case 'DELETE_SUCCESS':
+      return { ...state, loadingDelete: false, successDelete: true };
+    case 'DELETE_FAIL':
+      return { ...state, loadingDelete: false };
+    case 'DELETE_RESET':
+      return { ...state, loadingDelete: false, successDelete: false };
     default:
       state;
   }
@@ -43,7 +58,10 @@ function AdminDashboard() {
   const classes = useStyles();
   const { userInfo } = state;
 
-  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
+  const [
+    { loading, error, products, loadingCreate, successDelete, loadingDelete },
+    dispatch,
+  ] = useReducer(reducer, {
     loading: true,
     products: [],
     error: '',
