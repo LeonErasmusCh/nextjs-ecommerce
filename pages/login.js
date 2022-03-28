@@ -141,8 +141,8 @@ export default function Login() {
           <ListItem>
             Forgot password? &nbsp;
             {/* <NextLink href={`/?redirect=${redirect || '/'}`} passHref> */}
-            <NextLink href={'/change-password'} passHref>
-              <Link color="secondary">Recover</Link>
+            <NextLink href={'/password-reset'} passHref>
+              <Link color="secondary">Reset</Link>
             </NextLink>
           </ListItem>
         </List>

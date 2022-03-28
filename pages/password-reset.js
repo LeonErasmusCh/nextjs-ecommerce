@@ -36,7 +36,12 @@ export default function ChangePassword() {
     }
   }, []);
 
-  const submitHandler = async ({ email, password, confirmPassword }) => {
+  const submitHandler = async ({
+    email,
+    password,
+    confirmPassword,
+    securityConfirm,
+  }) => {
     closeSnackbar();
     if (password !== confirmPassword) {
       enqueueSnackbar("Passwords don't match", { variant: 'error' });
@@ -44,10 +49,14 @@ export default function ChangePassword() {
       console.log(confirmPassword);
       return;
     }
+
+    console.log(securityConfirm);
+
     try {
-      const { data } = await axios.put('/api/users/change-password', {
+      const { data } = await axios.put('/api/users/reset-password', {
         email,
         password,
+        securityConfirm,
       });
       console.log(data);
       enqueueSnackbar('Password updates successfully', { variant: 'success' });
@@ -58,10 +67,10 @@ export default function ChangePassword() {
   };
 
   return (
-    <Layout title="Change Password">
+    <Layout title="Reset Password">
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h1" variant="h1">
-          Change Password
+          Reset Password
         </Typography>
         <List>
           <ListItem>
@@ -95,6 +104,42 @@ export default function ChangePassword() {
               )}
             ></Controller>
           </ListItem>
+
+          <Typography>
+            Where was your first holiday destination as a child?
+          </Typography>
+          <ListItem>
+            {/* Controller is a react-hook-form component */}
+            <Controller
+              name="securityConfirm"
+              control={control}
+              defaultValue=""
+              /* Rules = Validation  */
+              rules={{
+                required: true,
+                minLenght: 2,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="securityConfirm"
+                  label="Security Question"
+                  inputProps={{ type: 'name' }}
+                  error={Boolean(errors.name)}
+                  helperText={
+                    errors.securityQuestion
+                      ? errors.securityQuestion.type === 'minLength'
+                        ? 'Answer is must be more than 1 character long'
+                        : 'Answer is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+
           <ListItem>
             {/* Controller is a react-hook-form component */}
             <Controller
@@ -111,7 +156,7 @@ export default function ChangePassword() {
                   variant="outlined"
                   fullWidth
                   id="password"
-                  label="password"
+                  label=" New Password"
                   inputProps={{ type: 'password' }}
                   error={Boolean(errors.password)}
                   helperText={
@@ -141,8 +186,8 @@ export default function ChangePassword() {
                 <TextField
                   variant="outlined"
                   fullWidth
-                  id="ConfirmPassword"
-                  label="Confirm Password"
+                  id="confirmPassword"
+                  label="Confirm Password New Password"
                   inputProps={{ type: 'password' }}
                   error={Boolean(errors.ConfirmPassword)}
                   helperText={

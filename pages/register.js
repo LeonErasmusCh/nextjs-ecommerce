@@ -41,7 +41,13 @@ export default function Register() {
     }
   }, []);
 
-  const submitHandler = async ({ name, email, password, confirmPassword }) => {
+  const submitHandler = async ({
+    name,
+    email,
+    password,
+    confirmPassword,
+    securityQuestion,
+  }) => {
     closeSnackbar();
     if (password !== confirmPassword) {
       enqueueSnackbar("Passwords don't match", { variant: 'error' });
@@ -54,8 +60,11 @@ export default function Register() {
         name,
         email,
         password,
+        securityQuestion,
       });
+
       dispatch({ type: 'USER_LOGIN', payload: data });
+      console.log(data);
       Cookies.set('userInfo', data);
       router.push(redirect || '/');
     } catch (err) {
@@ -86,7 +95,7 @@ export default function Register() {
                   variant="outlined"
                   fullWidth
                   id="name"
-                  label="name"
+                  label="Name"
                   inputProps={{ type: 'name' }}
                   error={Boolean(errors.name)}
                   helperText={
@@ -117,7 +126,7 @@ export default function Register() {
                   variant="outlined"
                   fullWidth
                   id="email"
-                  label="email"
+                  label="Email"
                   inputProps={{ type: 'email' }}
                   error={Boolean(errors.email)}
                   helperText={
@@ -148,7 +157,7 @@ export default function Register() {
                   variant="outlined"
                   fullWidth
                   id="password"
-                  label="password"
+                  label="Password"
                   inputProps={{ type: 'password' }}
                   error={Boolean(errors.password)}
                   helperText={
@@ -187,6 +196,41 @@ export default function Register() {
                       ? errors.ConfirmPassword.type === 'minLength'
                         ? 'Confirm Password is more than 5'
                         : 'Confirm Password is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+
+          <Typography>
+            Where was your first holiday destination as a child?
+          </Typography>
+          <ListItem>
+            {/* Controller is a react-hook-form component */}
+            <Controller
+              name="securityQuestion"
+              control={control}
+              defaultValue=""
+              /* Rules = Validation  */
+              rules={{
+                required: true,
+                minLenght: 2,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="securityQuestion"
+                  label="Security Question"
+                  inputProps={{ type: 'name' }}
+                  error={Boolean(errors.name)}
+                  helperText={
+                    errors.securityQuestion
+                      ? errors.securityQuestion.type === 'minLength'
+                        ? 'Answer is must be more than 1 character long'
+                        : 'Answer is required'
                       : ''
                   }
                   {...field}

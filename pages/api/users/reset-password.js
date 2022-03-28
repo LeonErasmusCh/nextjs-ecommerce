@@ -11,8 +11,9 @@ const handler = nc({
 handler.put(async (req, res) => {
   await db.connect();
   const user = await User.findOne({ email: req.body.email });
-  if (user) {
-    (user.password = bcrypt.hashSync(req.body.password)), await db.disconnect();
+  if (user && user.securityQuestion == req.body.securityConfirm) {
+    user.password = bcrypt.hashSync(req.body.password);
+    await db.disconnect();
     await user.save();
     res.send({ message: 'Change password for', user });
   } else {
