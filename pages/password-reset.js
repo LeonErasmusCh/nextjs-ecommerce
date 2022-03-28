@@ -105,41 +105,6 @@ export default function ChangePassword() {
             ></Controller>
           </ListItem>
 
-          <Typography>
-            Where was your first holiday destination as a child?
-          </Typography>
-          <ListItem>
-            {/* Controller is a react-hook-form component */}
-            <Controller
-              name="securityConfirm"
-              control={control}
-              defaultValue=""
-              /* Rules = Validation  */
-              rules={{
-                required: true,
-                minLenght: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="securityConfirm"
-                  label="Security Question"
-                  inputProps={{ type: 'name' }}
-                  error={Boolean(errors.name)}
-                  helperText={
-                    errors.securityQuestion
-                      ? errors.securityQuestion.type === 'minLength'
-                        ? 'Answer is must be more than 1 character long'
-                        : 'Answer is required'
-                      : ''
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-
           <ListItem>
             {/* Controller is a react-hook-form component */}
             <Controller
@@ -187,7 +152,7 @@ export default function ChangePassword() {
                   variant="outlined"
                   fullWidth
                   id="confirmPassword"
-                  label="Confirm Password New Password"
+                  label="Confirm New Password"
                   inputProps={{ type: 'password' }}
                   error={Boolean(errors.ConfirmPassword)}
                   helperText={
@@ -195,6 +160,37 @@ export default function ChangePassword() {
                       ? errors.ConfirmPassword.type === 'minLength'
                         ? 'Confirm Password is more than 5'
                         : 'Confirm Password is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+          <ListItem>
+            {/* Controller is a react-hook-form component */}
+            <Controller
+              name="securityConfirm"
+              control={control}
+              defaultValue=""
+              /* Rules = Validation  */
+              rules={{
+                required: true,
+                minLenght: 2,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="securityConfirm"
+                  label="Where was your first holiday destination as a child?"
+                  inputProps={{ type: 'name' }}
+                  error={Boolean(errors.name)}
+                  helperText={
+                    errors.securityQuestion
+                      ? errors.securityQuestion.type === 'minLength'
+                        ? 'Answer is must be more than 1 character long'
+                        : 'Answer is required'
                       : ''
                   }
                   {...field}
