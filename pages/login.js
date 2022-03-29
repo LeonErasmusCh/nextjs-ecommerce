@@ -142,7 +142,7 @@ export default function Login() {
             Forgot password? &nbsp;
             {/* <NextLink href={`/?redirect=${redirect || '/'}`} passHref> */}
             <NextLink href={'/password-reset'} passHref>
-              <Link color="secondary">Reset</Link>
+              <Link color="secondary">Reset Password</Link>
             </NextLink>
           </ListItem>
         </List>

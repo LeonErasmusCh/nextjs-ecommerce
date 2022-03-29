@@ -154,10 +154,10 @@ export default function ChangePassword() {
                   id="confirmPassword"
                   label="Confirm New Password"
                   inputProps={{ type: 'password' }}
-                  error={Boolean(errors.ConfirmPassword)}
+                  error={Boolean(errors.password)}
                   helperText={
-                    errors.ConfirmPassword
-                      ? errors.ConfirmPassword.type === 'minLength'
+                    errors.password
+                      ? errors.password.type === 'minLength'
                         ? 'Confirm Password is more than 5'
                         : 'Confirm Password is required'
                       : ''
@@ -184,11 +184,11 @@ export default function ChangePassword() {
                   fullWidth
                   id="securityConfirm"
                   label="Where was your first holiday destination as a child?"
-                  inputProps={{ type: 'name' }}
-                  error={Boolean(errors.name)}
+                  inputProps={{ type: 'text' }}
+                  error={Boolean(errors.securityConfirm)}
                   helperText={
-                    errors.securityQuestion
-                      ? errors.securityQuestion.type === 'minLength'
+                    errors.securityConfirm
+                      ? errors.securityConfirm.type === 'minLength'
                         ? 'Answer is must be more than 1 character long'
                         : 'Answer is required'
                       : ''

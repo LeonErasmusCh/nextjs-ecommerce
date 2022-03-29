@@ -18,7 +18,11 @@ handler.put(async (req, res) => {
     res.send({ message: 'Change password for', user });
   } else {
     await db.disconnect();
-    res.status(404).send({ message: 'user not found' });
+    res
+      .status(404)
+      .send({
+        message: 'user not found or Security question not answered correctly',
+      });
   }
 });
 
