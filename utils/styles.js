@@ -7,6 +7,9 @@ const useStyles = makeStyles({
       color: '#808080',
       marginLeft: 10,
     },
+    '& a:hover': {
+      textDecoration: 'none',
+    },
   },
   brand: {
     fontWeight: 'bold',
