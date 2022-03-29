@@ -64,6 +64,7 @@ function AdminDashboard() {
     };
     fetchData();
   }, []);
+
   return (
     <Layout title="Admin Dashboard">
       <Grid container spacing={1}>
