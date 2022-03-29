@@ -63,7 +63,7 @@ function AdminDashboard() {
       }
     };
     fetchData();
-  });
+  }, []);
 
   return (
     <Layout title="Admin Dashboard">
