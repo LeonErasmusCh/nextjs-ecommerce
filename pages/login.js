@@ -132,14 +132,14 @@ export default function Login() {
             </Button>
           </ListItem>
           <ListItem>
-            Don't have an account?
+            Don't have an account? &nbsp;
             {/* <NextLink href={`/?redirect=${redirect || '/'}`} passHref> */}
             <NextLink href={'/register'} passHref>
               <Link color="secondary">Register</Link>
             </NextLink>
           </ListItem>
           <ListItem>
-            Forgot password?
+            Forgot password? &nbsp;
             {/* <NextLink href={`/?redirect=${redirect || '/'}`} passHref> */}
             <NextLink href={'/password-reset'} passHref>
               <Link color="secondary">Reset Password</Link>
