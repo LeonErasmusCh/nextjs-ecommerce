@@ -1,3 +1,19 @@
+## Deployed project can be seen at:
+
+https://ecom-nextjs-olive.vercel.app/
+
+## Login to the project as a user:
+
+user: jane@example.com
+password: 123456
+
+## Login as Admin:
+
+user: admin@example.com
+password: 123456
+
+## ****************\_\_\_****************
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
