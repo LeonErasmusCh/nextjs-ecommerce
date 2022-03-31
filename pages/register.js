@@ -204,7 +204,7 @@ export default function Register() {
             ></Controller>
           </ListItem>
 
-          <Typography>
+          <Typography className={classes.secretQuestion}>
             Where was your first holiday destination as a child?
           </Typography>
           <ListItem>
