@@ -61,7 +61,7 @@ const useStyles = makeStyles({
     width: '100%',
   },
   secretQuestion: {
-    padding: '15px 20px',
+    padding: '15px 20px 5px ',
   },
 });
 export default useStyles;
